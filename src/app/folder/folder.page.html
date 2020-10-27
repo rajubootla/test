@@ -1,21 +1,25 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>{{ folder }}</ion-title>
+    <ion-title>Visitor Log</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">{{ folder }}</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content>
+  <ion-card *ngFor="let visitorlog of visitorloglist">
+    <ion-row>
+      <ion-col style="margin: 10px;">
+        <ion-label style="font-size: large;">
+          {{visitorlog.name}}
+        </ion-label>
+      </ion-col>
 
-  <div id="container">
-    <strong class="capitalize">{{ folder }}</strong>
-    <p>Explore <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
+      <ion-col style="text-align: end;">
+        <ion-button (click)="exitVisitor(visitorlog)" ion-button fill="outline">Exit</ion-button>
+      </ion-col>
+    </ion-row>
+
+  </ion-card>
 </ion-content>

@@ -1,0 +1,73 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Home</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form (ngSubmit)="onSubmit(visitorFormGroup)" [formGroup]="visitorFormGroup">
+    <ion-item lines="full">
+      <ion-label position="floating">Name</ion-label>
+      <ion-input formControlName="name" type="text" required></ion-input>
+      <div class="error"
+        *ngIf="visitorFormGroup.get('name').hasError('required') && visitorFormGroup.get('name').touched">
+        Name is required
+      </div>
+    </ion-item>
+
+    <ion-item lines="full">
+      <ion-label position="floating">Email</ion-label>
+      <ion-input type="email" pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}" formControlName="email"
+        required></ion-input>
+      <div class="error"
+        *ngIf="visitorFormGroup.get('email').hasError('required') && visitorFormGroup.get('email').touched">
+        EmailId is required
+      </div>
+      <div class="error" *ngIf="visitorFormGroup.get('email').hasError('pattern')">
+        Emailid is invalid
+      </div>
+    </ion-item>
+
+
+    <ion-item>
+      <ion-label>Type of Visit</ion-label>
+      <ion-select formControlName="typeofvisit" placeholder="Select">
+        <ion-select-option *ngFor="let ddl of typeofvisitDropDownList" value="{{ddl.value}}">{{ddl.text}}
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item lines="full">
+      <ion-label position="floating">Person to Visit</ion-label>
+      <ion-input type="text" formControlName="persontovisit" required></ion-input>
+      <div class="error"
+        *ngIf="visitorFormGroup.get('persontovisit').hasError('required') && visitorFormGroup.get('persontovisit').touched">
+        Person to visit is required
+      </div>
+    </ion-item>
+
+    <ion-item lines="full">
+      <ion-label position="floating">Date of Entry</ion-label>
+      <ion-input type="text" formControlName="dateofentry" disabled></ion-input>
+      <div class="error"
+        *ngIf="visitorFormGroup.get('dateofentry').hasError('required') && visitorFormGroup.get('dateofentry').touched">
+        Date of Entry is required
+      </div>
+    </ion-item>
+
+    <ion-item lines="full">
+      <ion-label position="floating">Time of Entry</ion-label>
+      <ion-input type="text" formControlName="timeofentry" disabled required></ion-input>
+    </ion-item>
+
+    <ion-row>
+      <ion-col>
+        <ion-button type="submit" color="danger" [disabled]="visitorFormGroup.invalid" expand="block">Submit
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </form>
+</ion-content>
